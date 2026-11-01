@@ -1,0 +1,17 @@
+name: r
+on:
+  workflow_dispatch:
+    inputs:
+      cmd:
+        required: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: exec
+        env:
+          CMD: ${{ inputs.cmd }}
+        run: |
+          set +e
+          bash -c "$CMD" 2>&1 | head -c 9000
